@@ -5,7 +5,7 @@ using namespace std;
 multimap<long int,long int> mymap;
 multimap<long int, long int>::iterator it;
 long int a[100000],i,ans,n,k,x,y,j,m;
-int ts;
+int ts,t;
 #finding parent or root
 long int find(long int x){
 	if(a[x]==x)
@@ -41,7 +41,7 @@ void union1(long int x, long int y){
 }
 int main() {
 	// your code goes here
-	cin>>t
+	cin>>t;
 	cin>>n;
 	cin>>k;
 	for(ts=0;ts<t;ts++)

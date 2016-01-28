@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include<map>
+using namespace std;
+multimap<long int,long int> mymap;
+multimap<long int, long int>::iterator it;
+long int a[100000],i,ans,n,k,x,y,j,m;
+int ts;
+#finding parent or root
+long int find(long int x){
+	if(a[x]==x)
+		return x;
+	else
+		return find(a[x]);
+}
+
+void union1(long int x, long int y){
+	if(find(x)==find(y))
+{
+		return;
+		}
+		else
+		{
+
+	multimap<long int,long int>::iterator it;
+	m=0;
+	y=find(y);
+	#avoiding heirarichal structure
+	for(it=mymap.equal_range(y).first;it!=mymap.equal_range(y).second;++it)
+	{
+	cout << (*it).first << " => " << (*it).second << '\n';
+		mymap.insert (pair<long int,long int>(find(x),(*it).second));
+		cout<<"jj";
+		m=1;
+	}
+	if(m==1)
+		mymap.erase(y);
+	a[y]=a[x];
+	mymap.insert (pair<long int,long int>(find(x),y));
+}
+}
+int main() {
+	// your code goes here
+	cin>>t
+	cin>>n;
+	cin>>k;
+	for(ts=0;ts<t;ts++)
+	{
+for(i=1;i<=n;i++)
+{
+	a[i]=i;
+}	
+for(j=1;j<=k;j++)
+{
+	cin>>x;
+	cin>>y;
+	union1(x,y);
+}
+    for (it = mymap.begin(); it != mymap.end(); ++it)
+
+        cout << (*it).first << " => " << (*it).second << '\n';
+
+ans=1;
+for (it = mymap.begin(); it != mymap.end(); ++it)
+{
+	x=mymap.count((*it).first);
+	if(x!=1&&x!=0)
+	{	x=x+1;
+		ans=ans*((x*(x-1))/2);
+	mymap.erase(((*it).first));
+	}
+}
+cout<<ans%1000000007<<"\n";
+}
+	return 0;
+}
